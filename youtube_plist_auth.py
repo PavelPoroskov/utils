@@ -6,6 +6,9 @@ import httplib2
 import os
 import sys
 
+import pprint
+from datetime import datetime
+
 from apiclient.discovery import build
 from apiclient.errors import HttpError
 from oauth2client.client import flow_from_clientsecrets
@@ -44,11 +47,35 @@ def get_authenticated_service(args):
       http=credentials.authorize(httplib2.Http()))
 
 
-args = argparser.parse_args()
+#args = argparser.parse_args()
+args = argparser.parse_args(sys.argv[2:])
 service = get_authenticated_service(args)
 
 def print_results(results):
-  print(results)
+#  print(results)
+
+#  pp = pprint.PrettyPrinter()
+#  pp.pprint(results)
+
+#   print(type(results))
+
+   for i in results["items"]:
+     s = i["snippet"]
+
+     date_string = s["publishedAt"]
+
+#     date = datetime.strptime(date_string, "%Y-%m-%d %H:%M:%S %z" )
+#     date = datetime.strptime(date_string, "%Y%m%dT%H%M%S.%fZ" )
+     date = datetime.strptime(date_string, "%Y-%m-%dT%H:%M:%S.%fZ" )
+                                            
+#                                            "%Y-%m-%dT%H:%M:%S.%f%z"
+#     date = datetime.strptime(date_string)
+#     datetime.
+     title = s["title"]
+     nItems = i["contentDetails"]["itemCount"]
+
+     print( date.year, title, nItems )
+
 
 # Build a resource based on a list of properties given as key-value pairs.
 # Leave properties with empty values out of the inserted resource.
@@ -101,18 +128,61 @@ def remove_empty_kwargs(**kwargs):
 
 # Sample python code for playlists.list
 
+def addResults( bigList, results):
+
+   for i in results["items"]:
+     s = i["snippet"]
+
+     date_string = s["publishedAt"]
+     date = datetime.strptime(date_string, "%Y-%m-%dT%H:%M:%S.%fZ" )
+     title = s["title"]
+     nItems = i["contentDetails"]["itemCount"]
+
+#     print( date.year, title, nItems )
+     bigList.append({
+      'date': date.year,
+      'title': title,
+      'itemCount':nItems
+      })
+
+
 def playlists_list_by_channel_id(service, **kwargs):
   kwargs = remove_empty_kwargs(**kwargs) # See full sample for function
-  results = service.playlists().list(
-    **kwargs
-  ).execute()
 
-  print_results(results)
+  # results = service.playlists().list(
+  #   **kwargs
+  # ).execute()
 
+  # print_results(results)
+
+  bigList = []
+
+  playlists = service.playlists()
+  request = playlists.list(**kwargs)
+
+  while not (request is None):
+    results = request.execute()
+
+#    print_results(results)
+    addResults( bigList, results )
+
+    request = playlists.list_next(request, results)
+
+  bigList.sort(key=lambda item: (item["title"], item["date"]) )
+
+  for item in bigList:
+    print( "" + str(item["date"]) + ", " + item["title"] + ", " + str(item["itemCount"]) )
+
+
+
+# playlists_list_by_channel_id(service,
+#     part='snippet,contentDetails',
+#     channelId='UCENeeLCbbDNAP-664-t26FA',
+#     maxResults=25)
+  
 playlists_list_by_channel_id(service,
     part='snippet,contentDetails',
-    channelId='UCENeeLCbbDNAP-664-t26FA',
+    channelId=sys.argv[1],
     maxResults=25)
-  
 
 

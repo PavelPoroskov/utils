@@ -52,7 +52,7 @@ args = argparser.parse_args(sys.argv[2:])
 service = get_authenticated_service(args)
 
 def print_results(results):
-#  print(results)
+   print(results)
 
 #  pp = pprint.PrettyPrinter()
 #  pp.pprint(results)
@@ -137,12 +137,14 @@ def addResults( bigList, results):
      date = datetime.strptime(date_string, "%Y-%m-%dT%H:%M:%S.%fZ" )
      title = s["title"]
      nItems = i["contentDetails"]["itemCount"]
+     
 
 #     print( date.year, title, nItems )
      bigList.append({
       'date': date.year,
       'title': title,
-      'itemCount':nItems
+      'itemCount':nItems,
+      'channelTitle': s["channelTitle"]
       })
 
 
@@ -171,7 +173,12 @@ def playlists_list_by_channel_id(service, **kwargs):
   bigList.sort(key=lambda item: (item["title"], item["date"]) )
 
   for item in bigList:
-    print( "" + str(item["date"]) + ", " + item["title"] + ", " + str(item["itemCount"]) )
+    # s = "" + str(item["date"]) + "; " + item["title"] + "; " + str(item["itemCount"])
+    # s = s + "; " + str(item["channelTitle"])
+    s = u'' + unicode(item["date"]) + u'; ' + item["title"] + u'; ' + unicode(item["itemCount"])
+    s = s + u'; ' + item["channelTitle"]
+    s = s.encode('utf-8')
+    print( s )
 
 
 

@@ -1,3 +1,4 @@
+
 import os
 import re
 from collections import Counter, namedtuple 
@@ -9,14 +10,13 @@ from itertools import groupby
 
 def genWords( in_fromDir):
 	for file in os.listdir( in_fromDir ):
-		if file.startswith("chapter") or file.startswith("part") or file.startswith("content") :
+		if file.endswith(".srt") :
 	#        print( os.path.join( fromDir, file) )
 
-			html_text = open( os.path.join( in_fromDir, file) ).read()
-			text_filtered = re.sub( '<(.*?)>', '', html_text )
+			text_filtered = open( os.path.join( in_fromDir, file) ).read()
 	#		listWords = re.split('\W+', text_filtered )
 
-#			print(file)
+			print(file)
 	#		print(text_filtered)
 			for mobj in re.finditer( r'\w+', text_filtered):
 	#			print(word)
@@ -31,7 +31,7 @@ listBlackList = listBlackList + [ 'and', 'or', 'not' ]
 listBlackList = listBlackList + [ 'with', 'of', 'to', 'in' ]
 
 
-fromDir = '/home/*/xhtml'
+fromDir = '/home/pavel/0_dev/utils'
 
 data = Counter( genWords(fromDir) )
 #print(data)
@@ -51,18 +51,6 @@ for word, count, wordlower in data_with_lower:
 		if word_nos in setWords:
 			data_noplural.append( (word, count, word_nos) )
 			flag_add = False
-		else:
-#			if wordlower.endswith('ies') and 3 < len(wordlower):
-			if wordlower.endswith('es') and 2 < len(wordlower):
-				word_nos = wordlower[:-2]
-				if word_nos in setWords:
-					data_noplural.append( (word, count, word_nos) )
-					flag_add = False
-	elif wordlower.endswith('ed') and 2 < len(wordlower):
-			word_nos = wordlower[:-2]
-			if word_nos in setWords:
-				data_noplural.append( (word, count, word_nos) )
-				flag_add = False
 
 	if flag_add:
 		data_noplural.append( (word, count, wordlower) )
@@ -90,13 +78,4 @@ for (word, count) in sorted(data_lower_uniq, key=lambda i: i[0] ):
 	print(word, count)
 
 #to do
-#+) plurals: zombie, zombies --+ zombie
-
-#new
-#get one file from console (srt, epub)
-#	get list of files from console
-#	get .txt file
-#get names of heroes (chapter in, first)
-#console parameters: 
-#	sort: alphabetical/most use
-#output: word, frequency, chapter
+#) plurals: zombie, zombies --+ zombie

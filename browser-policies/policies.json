@@ -1,0 +1,26 @@
+{
+  "policies": {
+    "DisableFirefoxAccounts": true,
+    "DisablePocket": true,
+    "Extensions": {
+      "Install": [
+        "https://addons.mozilla.org/firefox/downloads/file/4188488/ublock_origin-1.53.0.xpi",
+        "https://addons.mozilla.org/firefox/downloads/file/4243562/bookmark_info-2.2.2.xpi"
+      ]
+    },
+    "Preferences": {
+      "dom.security.https_only_mode": {
+        "Value": true,
+        "Status": "default"
+      },
+      "dom.security.https_only_mode_ever_enabled": {
+        "Value": true,
+        "Status": "default"
+      },
+      "browser.startup.page": {
+        "Value": 3,
+        "Status": "default"
+      }
+    }
+  }
+}

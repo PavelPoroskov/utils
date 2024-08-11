@@ -5,7 +5,7 @@
     "Extensions": {
       "Install": [
         "https://addons.mozilla.org/firefox/downloads/file/4188488/ublock_origin-1.53.0.xpi",
-        "https://addons.mozilla.org/firefox/downloads/file/4334861/bookmark_info-2.10.2.xpi"
+        "https://addons.mozilla.org/firefox/downloads/file/4334941/bookmark_info-2.10.3.xpi"
       ]
     },
     "Preferences": {

@@ -4,8 +4,8 @@
     "DisablePocket": true,
     "Extensions": {
       "Install": [
-        "https://addons.mozilla.org/firefox/downloads/file/4188488/ublock_origin-1.53.0.xpi",
-        "https://addons.mozilla.org/firefox/downloads/file/4373818/bookmark_info-2.10.17.xpi"
+        "https://addons.mozilla.org/firefox/downloads/file/4359936/ublock_origin-1.60.0.xpi",
+        "https://addons.mozilla.org/firefox/downloads/file/4385001/bookmark_info-2.10.18.xpi"
       ]
     },
     "Preferences": {

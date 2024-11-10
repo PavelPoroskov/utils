@@ -2,11 +2,18 @@
   "policies": {
     "DisableFirefoxAccounts": true,
     "DisablePocket": true,
-    "Extensions": {
-      "Install": [
-        "https://addons.mozilla.org/firefox/downloads/file/4188488/ublock_origin-1.53.0.xpi"
-      ]
+    "ExtensionSettings": {
+      "uBlock0@raymondhill.net": {
+        "installation_mode": "force_installed",
+        "install_url": "https://addons.mozilla.org/firefox/downloads/latest/uBlock0@raymondhill.net/latest.xpi"
+      },
+      "browsec@browsec.com": {
+        "installation_mode": "force_installed",
+        "install_url": "https://addons.mozilla.org/firefox/downloads/latest/browsec@browsec.com/latest.xpi"
+      }
     },
+    "DisplayBookmarksToolbar": "never",
+    "HttpsOnlyMode": "force_enabled",
     "Preferences": {
       "dom.security.https_only_mode": {
         "Value": true,
@@ -15,11 +22,14 @@
       "dom.security.https_only_mode_ever_enabled": {
         "Value": true,
         "Status": "default"
-      },
-      "browser.startup.page": {
-        "Value": 3,
-        "Status": "default"
       }
+    },
+    "Homepage": {
+      "StartPage": "previous-session"
+    },
+    "FirefoxHome": {
+      "SponsoredTopSites": false,
+      "SponsoredPocket": false
     }
   }
 }

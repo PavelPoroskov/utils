@@ -2,12 +2,26 @@
   "policies": {
     "DisableFirefoxAccounts": true,
     "DisablePocket": true,
-    "Extensions": {
-      "Install": [
-        "https://addons.mozilla.org/firefox/downloads/file/4359936/ublock_origin-1.60.0.xpi",
-        "https://addons.mozilla.org/firefox/downloads/file/4385116/bookmark_info-2.10.19.xpi"
-      ]
+    "ExtensionSettings": {
+      "boomark-info0@paulprs.net": {
+        "installation_mode": "force_installed",
+        "install_url": "https://addons.mozilla.org/firefox/downloads/latest/boomark-info0@paulprs.net/latest.xpi"
+      },
+      "{d270de14-df6e-4f0b-a81a-7163af0368f3}": {
+        "installation_mode": "force_installed",
+        "install_url": "https://addons.mozilla.org/firefox/downloads/latest/{d270de14-df6e-4f0b-a81a-7163af0368f3}/latest.xpi"
+      },
+      "uBlock0@raymondhill.net": {
+        "installation_mode": "force_installed",
+        "install_url": "https://addons.mozilla.org/firefox/downloads/latest/uBlock0@raymondhill.net/latest.xpi"
+      },
+      "browsec@browsec.com": {
+        "installation_mode": "force_installed",
+        "install_url": "https://addons.mozilla.org/firefox/downloads/latest/browsec@browsec.com/latest.xpi"
+      }
     },
+    "DisplayBookmarksToolbar": "never",
+    "HttpsOnlyMode": "force_enabled",
     "Preferences": {
       "dom.security.https_only_mode": {
         "Value": true,
@@ -16,11 +30,14 @@
       "dom.security.https_only_mode_ever_enabled": {
         "Value": true,
         "Status": "default"
-      },
-      "browser.startup.page": {
-        "Value": 3,
-        "Status": "default"
       }
+    },
+    "Homepage": {
+      "StartPage": "previous-session"
+    },
+    "FirefoxHome": {
+      "SponsoredTopSites": false,
+      "SponsoredPocket": false
     }
   }
 }
